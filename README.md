@@ -1,4 +1,3 @@
-
 # Building a REST API with Spring Boot - Learning Summary (Provided by Claude)
 
 Below are some summaries of my chat conversation with Claude as I worked through this Spring Academy Course, which walked me through on how to build a Cash Card REST API using Spring Boot.
@@ -6,13 +5,9 @@ Below are some summaries of my chat conversation with Claude as I worked through
 ## Top Lessons Learned While Working on This Project 
 
 1. Spring Boot Version Mismatch (biggest issue)
-   1. You had Spring Boot 4.1.0 installed while the course was written for 3.x. This caused a cascade of problems including the wrong TestRestTemplate package path and other API differences. We diagnosed it through your build.gradle and downgraded to 3.3.5.
 2. Wrong JSONArray Import
-   1. You were using org.json.JSONArray instead of net.minidev.json.JSONArray, which caused containsExactlyInAnyOrder to fail since AssertJ couldn't resolve the correct ListAssert type. A classic Java gotcha where multiple libraries share identical class names.
 3. Spring Security Packages Not Resolving 
-   1. After correctly adding Spring Security to build.gradle and confirming Gradle was resolving the jars properly via the dependency tree, IntelliJ still couldn't find org.springframework.security packages. Fixed by invalidating IntelliJ's caches via File → Invalidate Caches → Invalidate and Restart.
 4. Invalid Gradle JDK Configuration 
-   1. Opening an existing Spring Boot project in IntelliJ threw a Gradle JDK configuration error. Fixed by pointing IntelliJ's Gradle JVM setting to your Java 17 installation.
 
 
 
