@@ -2,13 +2,32 @@
 
 Below are some summaries of my chat conversation with Claude as I worked through this Spring Academy Course, which walked me through on how to build a Cash Card REST API using Spring Boot.
 
-## Top Lessons Learned While Working on This Project 
+## Top Lessons Learned While Working on This Project
 
-1. Spring Boot Version Mismatch (biggest issue)
-2. Wrong JSONArray Import
-3. Spring Security Packages Not Resolving 
-4. Invalid Gradle JDK Configuration 
+### 1. Spring Boot Version Mismatch (biggest issue)
+You had Spring Boot 4.1.0 installed while the course was written for 3.x. This caused a
+cascade of problems including the wrong `TestRestTemplate` package path and other API
+differences. We diagnosed it through your `build.gradle` and downgraded to `3.3.5`.
 
+### 2. Wrong JSONArray Import
+You were using `org.json.JSONArray` instead of `net.minidev.json.JSONArray`, which caused
+`containsExactlyInAnyOrder` to fail since AssertJ couldn't resolve the correct `ListAssert`
+type. A classic Java gotcha where multiple libraries share identical class names.
+
+### 3. Spring Security Packages Not Resolving
+After correctly adding Spring Security to `build.gradle` and confirming Gradle was resolving
+the jars properly via the dependency tree, IntelliJ still couldn't find
+`org.springframework.security` packages. Fixed by invalidating IntelliJ's caches via
+**File → Invalidate Caches → Invalidate and Restart**.
+
+### 4. Invalid Gradle JDK Configuration
+Opening an existing Spring Boot project in IntelliJ threw a Gradle JDK configuration error.
+Fixed by pointing IntelliJ's Gradle JVM setting to your Java 17 installation.
+
+## 5. containsExactlyInAnyOrder Not Resolving
+IntelliJ couldn't find `containsExactlyInAnyOrder` on `JSONArray` because AssertJ was
+resolving it as `ObjectAssert` instead of `ListAssert`. Required an explicit cast to `List`
+to fix.
 
 
 ## Spring & Java
