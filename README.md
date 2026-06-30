@@ -24,10 +24,6 @@ the jars properly via the dependency tree, IntelliJ still couldn't find
 Opening an existing Spring Boot project in IntelliJ threw a Gradle JDK configuration error.
 Fixed by pointing IntelliJ's Gradle JVM setting to your Java 17 installation.
 
-## 5. containsExactlyInAnyOrder Not Resolving
-IntelliJ couldn't find `containsExactlyInAnyOrder` on `JSONArray` because AssertJ was
-resolving it as `ObjectAssert` instead of `ListAssert`. Required an explicit cast to `List`
-to fix.
 
 
 ## Spring & Java
